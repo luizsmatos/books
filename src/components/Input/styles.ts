@@ -24,7 +24,11 @@ const Container = styled.div<ContainerProps>`
   }
 
   @media (min-width: 1024px) {
-    width: ${px2vw(368)};
+    width: ${px2vw(368, 1024)};
+  }
+
+  @media (min-width: 1440px) {
+    width: ${px2vw(400)};
   }
 
   & + div {
