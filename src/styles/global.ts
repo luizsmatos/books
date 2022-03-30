@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     --violet-red: #B22E6F;
     --white: #FFFFFF;
+    --black: #000000;
     --gray-20: #333333;
 
     @media (max-width: 1080px) {
