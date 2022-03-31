@@ -25,15 +25,14 @@ export const Form = styled(Unform)`
 
   @media (max-width: 480px) {
     width: ${px2vw(300, 320)};
-    top: ${px2vw(200, 320)};
+    top: ${px2vw(250, 320)};
     left: ${px2vw(10, 320)};
     margin: 0 auto;
   }
 
   @media (min-width: 480px) {
     width: ${px2vw(430, 480)};
-    top: ${px2vw(200, 480)};
-    left: ${px2vw(10, 480)};
+    top: ${px2vw(250, 480)};
     margin-left: ${px2vw(25, 480)};
   }
 
