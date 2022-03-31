@@ -44,9 +44,7 @@ const Input = ({ children, name, label, placeholder, ...rest }: InputProps) => {
   return (
     <Container isFilled={isFilled} isFocused={isFocused}>
       <label htmlFor={name}>
-        <p>
-          {label} {error && <span>{error}</span>}
-        </p>
+        <p>{label}</p>
         <input
           name={name}
           ref={inputRef}

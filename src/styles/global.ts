@@ -7,6 +7,7 @@ const GlobalStyles = createGlobalStyle`
     --white: #FFFFFF;
     --black: #000000;
     --gray-20: #333333;
+    --gray-90: #999999;
 
     @media (max-width: 1080px) {
       html {
