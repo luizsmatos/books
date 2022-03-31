@@ -14,17 +14,7 @@ export interface IBook {
 }
 
 const Book: React.FC<{ book: IBook }> = ({ book }) => {
-  const {
-    id,
-    title,
-    description,
-    authors,
-    pageCount,
-    category,
-    imageUrl,
-    published,
-    publisher,
-  } = book;
+  const { title, authors, pageCount, imageUrl, published, publisher } = book;
 
   return (
     <BookContainer>

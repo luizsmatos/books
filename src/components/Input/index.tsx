@@ -19,8 +19,7 @@ const Input = ({ children, name, label, placeholder, ...rest }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
-  const { fieldName, defaultValue, registerField, error, clearError } =
-    useField(name);
+  const { fieldName, defaultValue, registerField, clearError } = useField(name);
 
   const handleInputFocus = useCallback(() => {
     clearError();
