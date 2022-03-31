@@ -35,10 +35,10 @@ interface IBooksResponse extends AxiosResponse {
 }
 
 const Books: React.FC = () => {
-  const { signOut, profile } = useAuth();
   const { width } = useWindowDimensions();
-  console.log(width);
+  const { signOut, profile } = useAuth();
   const { user } = profile;
+
   const [books, setBooks] = useState<IBook[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
