@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { Form as Unform } from '@unform/web';
 import px2vw from 'utils/px2vw';
@@ -111,4 +111,35 @@ export const Tooltip = styled.div`
 
     margin-left: 0.5px;
   }
+`;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Loader = styled.div`
+  border-radius: 100%;
+  border: 10px solid var(--violet-red);
+  border-bottom-color: transparent;
+  width: 75px;
+  height: 75px;
+  animation: ${rotate} 0.75s linear infinite;
 `;

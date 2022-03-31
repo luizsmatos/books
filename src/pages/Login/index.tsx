@@ -1,4 +1,4 @@
-import React, { createRef, useCallback } from 'react';
+import React, { createRef, useCallback, useState } from 'react';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import * as Yup from 'yup';
 
@@ -6,7 +6,7 @@ import Input from 'components/Input';
 import { useAuth } from 'hooks/useAuth';
 
 import logo from 'assets/images/logo-white.png';
-import { Container, Form, Tooltip } from './styles';
+import { Container, Form, Loader, LoaderContainer, Tooltip } from './styles';
 
 interface FormData {
   email: string;
@@ -15,7 +15,8 @@ interface FormData {
 
 const Login: React.FC = () => {
   const formRef = createRef<FormHandles>();
-  const { signIn, failedTryLogin } = useAuth();
+  const { signIn, failedTryLogin, loading } = useAuth();
+  const [errorValidation, setErrorValidation] = useState(false);
 
   const handleSubmit: SubmitHandler<FormData> = useCallback(
     async (data: FormData) => {
@@ -43,6 +44,7 @@ const Login: React.FC = () => {
             }
           });
           formRef.current?.setErrors(validationErrors);
+          setErrorValidation(true);
         }
       }
     },
@@ -57,12 +59,7 @@ const Login: React.FC = () => {
           <h3>Books</h3>
         </header>
 
-        <Input
-          name="email"
-          label="E-mail"
-          placeholder="Seu e-mail"
-          type="email"
-        />
+        <Input name="email" label="E-mail" placeholder="Seu e-mail" />
 
         <Input
           name="password"
@@ -74,10 +71,16 @@ const Login: React.FC = () => {
           <button type="submit">Entrar</button>
         </Input>
 
-        <Tooltip hidden={failedTryLogin}>
+        <Tooltip hidden={failedTryLogin || errorValidation}>
           <span>Email e/ou senha incorretos.</span>
         </Tooltip>
       </Form>
+
+      {loading && (
+        <LoaderContainer>
+          <Loader />
+        </LoaderContainer>
+      )}
     </Container>
   );
 };
