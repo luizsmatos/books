@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
+
 import React, {
   createContext,
   useContext,
@@ -7,6 +8,8 @@ import React, {
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import api from 'services/api';
 
 interface IPayload {
@@ -23,7 +26,7 @@ interface IUser {
 }
 
 interface IProfile {
-  profile: IUser;
+  user: IUser;
   token: string;
   authenticated: boolean;
 }
@@ -83,7 +86,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       const { data, headers } = response;
 
       setProfile({
-        profile: data,
+        user: data,
         token: headers.authorization,
         authenticated: true,
       });
@@ -97,13 +100,34 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const signOut = () => {
-    localStorage.removeItem(KEY);
     setProfile({
-      profile: {} as IUser,
+      user: {} as IUser,
       token: '',
       authenticated: false,
     });
+    localStorage.removeItem(KEY);
+    toast.success('Até logo! 🖐️', {
+      position: 'top-right',
+      toastId: 'notRepeat',
+    });
   };
+
+  api.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      if (error.response.status === 401 || error.response.status === 400) {
+        toast.error(`Tempo Expirado! 😢`, {
+          position: 'top-right',
+          toastId: 'notRepeat',
+        });
+        signOut();
+      }
+
+      return Promise.reject(error);
+    }
+  );
 
   const AuthContextProvider = {
     profile,
