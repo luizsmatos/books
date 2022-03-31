@@ -117,8 +117,16 @@ export const AuthProvider: React.FC = ({ children }) => {
       return response;
     },
     (error) => {
-      if (error.response.status === 401 || error.response.status === 400) {
+      if (error.response.status === 401 && profile.authenticated) {
         toast.error(`Tempo Expirado! 😢`, {
+          position: 'top-right',
+          toastId: 'notRepeat',
+        });
+        signOut();
+      }
+
+      if (error.response.status === 400) {
+        toast.error(`Infelizmente, algo deu errado! 😢`, {
           position: 'top-right',
           toastId: 'notRepeat',
         });
